@@ -2,18 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: appka
+    app.kubernetes.io/name: my-app
+    app.kubernetes.io/instance: my-app-1
   name: appka
   namespace: appka-1
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: appka
+      app.kubernetes.io/name: my-app
+      app.kubernetes.io/instance: my-app-1
   template:
     metadata:
       labels:
-        app: appka
+        app.kubernetes.io/name: my-app
+        app.kubernetes.io/instance: my-app-1
         actorSystemName: appka
     spec:
       containers:
@@ -48,7 +51,7 @@ spec:
           valueFrom:
             fieldRef:
               apiVersion: v1
-              fieldPath: "metadata.labels['app']"
+              fieldPath: "metadata.labels['app.kubernetes.io/instance']"
         - name: NAMESPACE
           valueFrom:
             fieldRef:
