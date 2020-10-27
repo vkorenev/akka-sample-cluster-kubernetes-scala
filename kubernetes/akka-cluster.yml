@@ -44,6 +44,11 @@ spec:
           containerPort: 8080
           protocol: TCP
         env:
+        - name: AKKA_CLUSTER_BOOTSTRAP_SERVICE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: "metadata.labels['app']"
         - name: NAMESPACE
           valueFrom:
             fieldRef:
